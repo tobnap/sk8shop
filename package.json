@@ -9,14 +9,14 @@
     "build-opt": "browserify src/ui/opt.js -o dist/opt.js -t [babelify browserify minifyify]",
     "build-umd": "browserify --standalone openjscad src/ui/umd.js -o dist/openjscad.umd.js -t [babelify browserify minifyify]",
     "build-all": "npm run build-web && npm run build-min && npm run build-opt && npm run build-umd",
+    "heroku-postbuild": "npm build-opt",
     "start": "budo src/ui/index.js:dist/index.js --port=8080 --live -- -b -t babelify",
     "preversion": "npm test",
     "version": "npm run build-all && git add -A ",
     "postversion": "git push origin master && git push origin master --tags",
     "release-patch": "git checkout master && git pull origin master && npm version patch",
     "release-minor": "git checkout master && git pull origin master && npm version minor",
-    "release-major": "git checkout master && git pull origin master && npm version major",
-    "postinstall": "node postInstall.js && node -e \"console.log('\\u001b[35m\\u001b[1mLove OpenJSCAD? You can now donate to our open collective:\\u001b[22m\\u001b[39m\\n > \\u001b[34mhttps://opencollective.com/openjscad/donate\\u001b[0m')\""
+    "release-major": "git checkout master && git pull origin master && npm version major"
   },
   "contributors": [
     {

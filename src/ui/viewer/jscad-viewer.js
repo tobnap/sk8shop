@@ -52,13 +52,13 @@ function Viewer (containerelement, options) {
 Viewer.defaults = function () {
   return {
     camera: {
-      fov: 45,                           // field of view
+      fov: 1.5,                           // field of view
       angle: {x: -60, y: 0, z: -45},  // view angle about XYZ axis
       position: {x: 0, y: 0, z: 100},  // initial position at XYZ
       clip: {min: 0.5, max: 1000}  // rendering outside this range is clipped
     },
     plate: {
-      draw: true,                // draw or not
+      draw: false,                // draw or not
       size: 200,                 // plate size (X and Y)
       // minor grid settings
       m: {

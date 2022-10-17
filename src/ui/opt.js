@@ -28,7 +28,7 @@ function init () {
       camera: {position: {x: 0, y: 0, z: 1000},
         clip: {min: 0.5, max: 3000}
       },
-      axis: {draw: true
+      axis: {draw: false
       }
     }
     })
