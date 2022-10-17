@@ -9,7 +9,7 @@
     "build-opt": "browserify src/ui/opt.js -o dist/opt.js -t [babelify browserify minifyify]",
     "build-umd": "browserify --standalone openjscad src/ui/umd.js -o dist/openjscad.umd.js -t [babelify browserify minifyify]",
     "build-all": "npm run build-web && npm run build-min && npm run build-opt && npm run build-umd",
-    "heroku-postbuild": "mkdir dist && npm run build-opt",
+    "heroku-postbuild": "mkdir dist && npm run build-all",
     "start-dev": "budo src/ui/index.js:dist/index.js --port=8080 --live -- -b -t babelify",
     "start": "npm run start-dev",
     "preversion": "npm test",
