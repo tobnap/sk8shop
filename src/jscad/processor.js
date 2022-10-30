@@ -200,12 +200,26 @@ Processor.prototype = {
     this.downloadOutputFileLink.className = 'downloadOutputFileLink' // so we can css it
     this.statusbuttons.appendChild(this.downloadOutputFileLink)
 
+    this.downloadParametersButton = document.createElement('button')
+    this.downloadParametersButton.innerHTML = 'Download Parameters'
+    this.downloadParametersButton.onclick = function (e) {
+      that.downloadParameters()
+    }
+    this.statusbuttons.appendChild(this.downloadParametersButton)
+    this.loadParametersButton = document.createElement('button')
+    this.loadParametersButton.innerHTML = 'Load Parameters'
+    this.loadParametersButton.onclick = function (e) {
+      that.loadParameters()
+    }
+    this.statusbuttons.appendChild(this.loadParametersButton)
+
     this.parametersdiv = this.containerdiv.parentElement.querySelector('div#parametersdiv')
     if (!this.parametersdiv) {
       this.parametersdiv = document.createElement('div')
       this.parametersdiv.id = 'parametersdiv'
       this.containerdiv.parentElement.appendChild(this.parametersdiv)
     }
+
     this.parameterstable = document.createElement('table')
     this.parameterstable.className = 'parameterstable'
     this.parametersdiv.appendChild(this.parameterstable)
@@ -554,6 +568,46 @@ Processor.prototype = {
       generateOutputFile(extension, blob, onDone, this)
       if (this.ondownload) this.ondownload(this)
     }
+  },
+
+  downloadParameters: function () {
+    var parameters = getParameterValues(this.paramControls);
+    console.log(parameters);
+    var file = new Blob([JSON.stringify(parameters)], {type: 'json'});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, 'parameters');
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = 'parameters.json';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+  },
+
+  loadParameters: function () {
+    var input = document.createElement('input');
+    input.type = 'file';
+
+    input.onchange = e => {
+      var file = e.target.files[0]; 
+
+      var reader = new FileReader();
+      reader.readAsText(file,'UTF-8');
+
+      reader.onload = readerEvent => {
+          var content = readerEvent.target.result;
+          this.createParamControls(content);
+          this.rebuildSolids();
+      }
+    }
+
+    input.click();
   },
 
   currentObjectsToBlob: function () {
