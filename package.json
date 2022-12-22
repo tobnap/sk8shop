@@ -11,7 +11,7 @@
     "build-all": "npm run build-web && npm run build-min && npm run build-opt && npm run build-umd",
     "heroku-postbuild": "mkdir dist && npm run build-all",
     "start-dev": "budo src/ui/index.js:dist/index.js --port=8080 --live -- -b -t babelify",
-    "start": "npm run start-dev",
+    "start": "budo src/ui/index.js:dist/index.js --port=$PORT --live -- -b -t babelify",
     "preversion": "npm test",
     "version": "npm run build-all && git add -A ",
     "postversion": "git push origin master && git push origin master --tags",
@@ -43,20 +43,20 @@
     "@jscad/io": "0.4.7",
     "@jscad/openscad-openjscad-translator": "0.0.11",
     "astring": "^1.3.1",
+    "babelify": "^7.2.0",
     "brace": "0.10.0",
+    "browserify-shim": "^3.8.12",
+    "budo": "^10.0.4",
     "esprima": "^3.1.3",
     "estraverse": "^4.2.0",
     "most-gestures": "^0.3.0",
-    "webworkify": "^1.4.0",
-    "browserify-shim": "^3.8.12"
+    "webworkify": "^1.4.0"
   },
   "devDependencies": {
     "ava": "^0.23.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.2.1",
     "babel-preset-es2015": "^6.1.18",
-    "babelify": "^7.2.0",
-    "budo": "10.0.3",
     "copy-dir": "^0.3.0",
     "minifyify": "^7.3.3"
   },
