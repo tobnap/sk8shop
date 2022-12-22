@@ -1,1 +1,1 @@
-web: node ./src/ui/index.js:dist/index.js --port=$PORT
+web: npm run start
