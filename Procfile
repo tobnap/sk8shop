@@ -1,1 +1,1 @@
-web: node ./src/ui/index.js:dist/index.js
+web: node ./src/ui/index.js:dist/index.js --port=$PORT
