@@ -979,7 +979,7 @@ function main(parameters) {
 
                 holes = make_wheelbase(bolt_pattern_length, bolt_pattern_width, wheelbase, hole_depth, truck_hole_diameter).translate([0, 0, -hole_depth / 2]);
 
-                if (mold_hole_support && !boardDisplay) {
+                if (mold_hole_support && router_template) {
                     holes = holes.union(cube({ size: [slice, mold_width, mold_height*2], center: true }).translate([(wheelbase / 2) + bolt_pattern_length, mold_width/2, 0])).union(cube({ size: [slice, mold_width, mold_height*2], center: true }).translate([(wheelbase / 2), mold_width/2, 0]));
                     holes = holes.union(cube({ size: [slice, mold_width, mold_height*2], center: true }).translate([-(wheelbase / 2) - bolt_pattern_length, mold_width/2, 0])).union(cube({ size: [slice, mold_width, mold_height*2], center: true }).translate([-(wheelbase / 2), mold_width/2, 0]));
                 }
